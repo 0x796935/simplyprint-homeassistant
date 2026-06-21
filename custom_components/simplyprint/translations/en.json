@@ -1,0 +1,183 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to SimplyPrint",
+        "description": "Enter your SimplyPrint organisation API key and Company ID. You can create an API key under Account → API in the SimplyPrint panel. Your Company ID is the number in your API base URL (https://api.simplyprint.io/<Company ID>/).",
+        "data": {
+          "api_key": "API key",
+          "company_id": "Company ID",
+          "base_url": "API base URL"
+        },
+        "data_description": {
+          "company_id": "The numeric organisation id from your API base URL.",
+          "base_url": "Only change this for self-hosted or enterprise deployments."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate SimplyPrint",
+        "description": "The API key for company {company_id} is no longer valid. Enter a new API key.",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid API key or Company ID.",
+      "cannot_connect": "Failed to connect to SimplyPrint.",
+      "rate_limited": "Rate limit reached, please wait a moment and try again."
+    },
+    "abort": {
+      "already_configured": "This SimplyPrint company is already configured.",
+      "reauth_successful": "Re-authentication was successful."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SimplyPrint options",
+        "data": {
+          "scan_interval": "Update interval",
+          "enable_statistics": "Fetch account statistics",
+          "statistics_days": "Statistics window"
+        },
+        "data_description": {
+          "scan_interval": "How often to poll printer state, in seconds. The API allows 60 requests/min.",
+          "enable_statistics": "Adds print-time, filament-usage and job-count sensors (requires the Pro plan).",
+          "statistics_days": "Number of days of history to summarise in the statistics sensors."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "operational": "Operational",
+          "printing": "Printing",
+          "paused": "Paused",
+          "pausing": "Pausing",
+          "resuming": "Resuming",
+          "cancelling": "Cancelling",
+          "error": "Error",
+          "offline": "Offline",
+          "downloading": "Downloading",
+          "in_maintenance": "In maintenance",
+          "unknown": "Unknown"
+        }
+      },
+      "progress": { "name": "Progress" },
+      "nozzle_temperature": { "name": "Nozzle temperature" },
+      "nozzle_target_temperature": { "name": "Nozzle target temperature" },
+      "bed_temperature": { "name": "Bed temperature" },
+      "bed_target_temperature": { "name": "Bed target temperature" },
+      "ambient_temperature": { "name": "Ambient temperature" },
+      "job_name": { "name": "Job name" },
+      "time_remaining": { "name": "Time remaining" },
+      "time_elapsed": { "name": "Time elapsed" },
+      "estimated_finish": { "name": "Estimated finish" },
+      "layer": { "name": "Layer" },
+      "total_layers": { "name": "Total layers" },
+      "filament_type": { "name": "Filament type" },
+      "filament_color": { "name": "Filament color" },
+      "filament_remaining": { "name": "Filament remaining" },
+      "host_memory": { "name": "Host memory usage" },
+      "host_usage": { "name": "Host CPU usage" },
+      "latency": { "name": "Latency" },
+      "total_printers": { "name": "Total printers" },
+      "online_printers": { "name": "Online printers" },
+      "printing_printers": { "name": "Printing printers" },
+      "total_print_time": { "name": "Total print time" },
+      "total_filament_usage": { "name": "Total filament usage" },
+      "print_job_count": { "name": "Print job count" },
+      "done_print_jobs": { "name": "Successful prints" },
+      "failed_print_jobs": { "name": "Failed prints" }
+    },
+    "binary_sensor": {
+      "online": { "name": "Online" },
+      "printing": { "name": "Printing" },
+      "paused": { "name": "Paused" },
+      "error": { "name": "Error" },
+      "awaiting_bed_clear": { "name": "Awaiting bed clear" },
+      "filament_sensor": { "name": "Filament runout" },
+      "out_of_order": { "name": "Out of order" },
+      "ai_enabled": { "name": "AI failure detection" },
+      "has_camera": { "name": "Camera" }
+    },
+    "button": {
+      "pause": { "name": "Pause" },
+      "resume": { "name": "Resume" },
+      "cancel": { "name": "Cancel" },
+      "clear_bed": { "name": "Clear bed" }
+    },
+    "image": {
+      "print_render": { "name": "Print render" }
+    }
+  },
+  "services": {
+    "pause": {
+      "name": "Pause print",
+      "description": "Pause the active print on one or more SimplyPrint printers."
+    },
+    "resume": {
+      "name": "Resume print",
+      "description": "Resume a paused print on one or more SimplyPrint printers."
+    },
+    "cancel": {
+      "name": "Cancel print",
+      "description": "Cancel the active print on one or more SimplyPrint printers.",
+      "fields": {
+        "reason": {
+          "name": "Cancel reason",
+          "description": "Cancel reason id (only used if your account requires one)."
+        },
+        "comment": {
+          "name": "Comment",
+          "description": "Optional free-text comment (max 500 characters)."
+        },
+        "return_to_queue": {
+          "name": "Return to queue",
+          "description": "Whether to return a cancelled queued print back to the queue."
+        },
+        "return_position": {
+          "name": "Return position",
+          "description": "Where to place the returned queue item."
+        }
+      }
+    },
+    "clear_bed": {
+      "name": "Clear bed",
+      "description": "Mark a printer's bed as cleared after a finished print.",
+      "fields": {
+        "success": {
+          "name": "Successful",
+          "description": "Whether the finished print was successful."
+        },
+        "rating": {
+          "name": "Rating",
+          "description": "Optional 1-4 star rating for the print."
+        }
+      }
+    },
+    "send_gcode": {
+      "name": "Send G-code",
+      "description": "Send raw G-code or a named macro to one or more printers (Print Farm plan).",
+      "fields": {
+        "gcode": {
+          "name": "G-code",
+          "description": "A list of G-code commands to run."
+        },
+        "macro": {
+          "name": "Macro",
+          "description": "Name of a predefined macro (e.g. home, extrude, retract)."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_targets": {
+      "message": "No SimplyPrint printers matched the service target."
+    }
+  }
+}

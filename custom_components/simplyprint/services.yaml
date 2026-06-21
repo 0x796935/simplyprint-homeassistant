@@ -1,0 +1,112 @@
+pause:
+  name: Pause print
+  description: Pause the active print on one or more SimplyPrint printers.
+  target:
+    device:
+      integration: simplyprint
+    entity:
+      integration: simplyprint
+
+resume:
+  name: Resume print
+  description: Resume a paused print on one or more SimplyPrint printers.
+  target:
+    device:
+      integration: simplyprint
+    entity:
+      integration: simplyprint
+
+cancel:
+  name: Cancel print
+  description: Cancel the active print on one or more SimplyPrint printers.
+  target:
+    device:
+      integration: simplyprint
+    entity:
+      integration: simplyprint
+  fields:
+    reason:
+      name: Cancel reason
+      description: Cancel reason id (only used if your account requires one).
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 99
+          mode: box
+    comment:
+      name: Comment
+      description: Optional free-text comment (max 500 characters).
+      required: false
+      selector:
+        text:
+          multiline: true
+    return_to_queue:
+      name: Return to queue
+      description: Whether to return a cancelled queued print back to the queue.
+      required: false
+      selector:
+        boolean:
+    return_position:
+      name: Return position
+      description: Where to place the returned queue item.
+      required: false
+      selector:
+        select:
+          options:
+            - original
+            - bottom
+            - top
+
+clear_bed:
+  name: Clear bed
+  description: >-
+    Mark a printer's bed as cleared after a finished print, completing the job
+    record and re-arming the printer for the next queue pick.
+  target:
+    device:
+      integration: simplyprint
+    entity:
+      integration: simplyprint
+  fields:
+    success:
+      name: Successful
+      description: Whether the finished print was successful.
+      required: false
+      default: true
+      selector:
+        boolean:
+    rating:
+      name: Rating
+      description: Optional 1-4 star rating for the print.
+      required: false
+      selector:
+        number:
+          min: 1
+          max: 4
+          mode: slider
+
+send_gcode:
+  name: Send G-code
+  description: >-
+    Send raw G-code or a named macro to one or more printers. Requires the
+    SimplyPrint Print Farm plan and the send_raw_gcode permission.
+  target:
+    device:
+      integration: simplyprint
+    entity:
+      integration: simplyprint
+  fields:
+    gcode:
+      name: G-code
+      description: A list of G-code commands to run.
+      required: false
+      example: '["G28", "M104 S200"]'
+      selector:
+        object:
+    macro:
+      name: Macro
+      description: Name of a predefined macro (e.g. home, extrude, retract).
+      required: false
+      selector:
+        text:
