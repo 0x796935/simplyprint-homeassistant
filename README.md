@@ -21,6 +21,23 @@
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=0x796935&repository=simplyprint-homeassistant&category=integration"><img alt="Add to HACS" src="https://my.home-assistant.io/badges/hacs_repository.svg"></a>
 </p>
 
+## Screenshots
+
+<p align="center">
+  <img src="images/dashboard.png" alt="SimplyPrint printers on a Home Assistant dashboard — status, progress, temperatures, filament and pause/resume/cancel controls" width="100%">
+</p>
+
+<table>
+  <tr>
+    <td width="50%"><img src="images/device.png" alt="Printer device page: control buttons and live sensors"></td>
+    <td width="50%"><img src="images/account.png" alt="SimplyPrint account device: fleet sensors and linked printer devices"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Per-printer device — controls &amp; sensors</em></td>
+    <td align="center"><em>Account device — fleet totals &amp; linked printers</em></td>
+  </tr>
+</table>
+
 ## Features
 
 - **UI setup** — add the integration, paste your API key + Company ID, done.
