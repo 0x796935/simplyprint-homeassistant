@@ -2,8 +2,6 @@ pause:
   name: Pause print
   description: Pause the active print on one or more SimplyPrint printers.
   target:
-    device:
-      integration: simplyprint
     entity:
       integration: simplyprint
 
@@ -11,8 +9,6 @@ resume:
   name: Resume print
   description: Resume a paused print on one or more SimplyPrint printers.
   target:
-    device:
-      integration: simplyprint
     entity:
       integration: simplyprint
 
@@ -20,8 +16,6 @@ cancel:
   name: Cancel print
   description: Cancel the active print on one or more SimplyPrint printers.
   target:
-    device:
-      integration: simplyprint
     entity:
       integration: simplyprint
   fields:
@@ -64,8 +58,6 @@ clear_bed:
     Mark a printer's bed as cleared after a finished print, completing the job
     record and re-arming the printer for the next queue pick.
   target:
-    device:
-      integration: simplyprint
     entity:
       integration: simplyprint
   fields:
@@ -92,8 +84,6 @@ send_gcode:
     Send raw G-code or a named macro to one or more printers. Requires the
     SimplyPrint Print Farm plan and the send_raw_gcode permission.
   target:
-    device:
-      integration: simplyprint
     entity:
       integration: simplyprint
   fields:

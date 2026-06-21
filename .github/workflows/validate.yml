@@ -22,6 +22,9 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # `brands` requires the domain to be added to home-assistant/brands
+          # (a separate PR); ignore it here so the custom-repo install validates.
+          ignore: brands
 
   tests:
     name: Tests

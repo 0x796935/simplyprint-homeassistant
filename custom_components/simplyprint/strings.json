@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Connect to SimplyPrint",
-        "description": "Enter your SimplyPrint organisation API key and Company ID. You can create an API key under Account → API in the SimplyPrint panel. Your Company ID is the number in your API base URL (https://api.simplyprint.io/<Company ID>/).",
+        "description": "Enter your SimplyPrint organisation API key and Company ID. You can create an API key under Account → API in the SimplyPrint panel. Your Company ID is the number in your API base URL (https://api.simplyprint.io/{company_id}/).",
         "data": {
           "api_key": "API key",
           "company_id": "Company ID",
